@@ -10,7 +10,7 @@ ports = "22,80,443"
 # 📁 Log-Datei vorbereiten
 datum = datetime.datetime.now().strftime("%Y-%m-%d")
 zeit = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-logordner = r"C:\Users\elimi\OneDrive\Desktop\Masterschool\Projecte\Scripts\LogsNetzwerkscan"
+logordner = r"Your\Logordner"
 os.makedirs(logordner, exist_ok=True)
 logpfad = os.path.join(logordner, f"scan_{datum}.txt")
 
@@ -28,11 +28,11 @@ try:
     if not aktive_hosts:
         print("ℹ️  Keine aktiven Geräte gefunden.")
         with open(logpfad, "a", encoding="utf-8") as logfile:
-            logfile.write("ℹ️  Keine aktiven Geräte gefunden.\n\n")
+            logfile.write("Keine aktiven Geräte gefunden.\n\n")
     else:
         print(f"🔎 {len(aktive_hosts)} aktive Geräte gefunden. Starte Port-Scan...\n")
         with open(logpfad, "a", encoding="utf-8") as logfile:
-            logfile.write(f"🔎 {len(aktive_hosts)} aktive Geräte gefunden. Starte Port-Scan...\n")
+            logfile.write(f" {len(aktive_hosts)} aktive Geräte gefunden. Starte Port-Scan...\n")
 
         # 🚪 Schritt 2: Ports auf jedem Host scannen
         for host in aktive_hosts:
@@ -56,4 +56,5 @@ except Exception as e:
     print(fehlermeldung.strip())
     with open(logpfad, "a", encoding="utf-8") as logfile:
         logfile.write(fehlermeldung)
+
 
