@@ -1,71 +1,94 @@
-Nmap Netzwerkscanner
-Python-Skripte zum Scannen lokaler Netzwerke mit python-nmap.
-Erkennt aktive Hosts und zeigt den Status ausgewählter Ports an.
+# Nmap Network Scanner
 
-Projektstruktur
-text
+Python scripts for scanning local networks using python-nmap.
+Detects active hosts and displays the status of selected ports.
+
+---
+
+## Project Structure
+
+```
 nmap-scanner/
-├── import-nmap.py        # Einfacher Scan, Ausgabe in der Konsole
-├── netzwerkscan-2.py     # Scan mit Log-Datei und Fehlerbehandlung
+├── import-nmap.py        # Simple scan with console output
+├── netzwerkscan-2.py     # Scan with log file and error handling
 └── README.md
-Voraussetzungen
-Python 3.8+
+```
 
-Nmap installiert und im PATH verfügbar → https://nmap.org/download.html
+---
 
-Python-Bibliothek python-nmap
+## Requirements
 
-bash
+- Python 3.8+
+- Nmap installed and available in PATH → https://nmap.org/download.html
+- Python library `python-nmap`
+
+```bash
 pip install python-nmap
-Skripte
-import-nmap.py
-Scannt einen Netzwerkbereich auf offene Ports und gibt die Ergebnisse in der Konsole aus.
+```
 
-bash
+---
+
+## Scripts
+
+### import-nmap.py
+
+Scans a network range for open ports and prints the results to the console.
+
+```bash
 python import-nmap.py
-Standardwerte:
+```
 
-Netzwerk: 192.168.1.0/24
+**Defaults:**
+- Network: `192.168.1.0/24`
+- Ports: `22, 80, 443`
 
-Ports: 22, 80, 443
+---
 
-netzwerkscan-2.py
-Zweistufiger Scan:
+### netzwerkscan-2.py
 
-Host Discovery im Netzwerk (-sn)
+Two-stage scan:
+1. Host discovery across the network (`-sn`)
+2. Port scan on each discovered host
 
-Port-Scan auf jedem gefundenen Host
+Results are printed to the console and saved to a log file.
 
-Ergebnisse werden in der Konsole angezeigt und in einer Log-Datei gespeichert.
-
-bash
+```bash
 python netzwerkscan-2.py
-Standardwerte:
+```
 
-Netzwerk: 192.168.178.0/24
+**Defaults:**
+- Network: `192.168.178.0/24`
+- Ports: `22, 80, 443`
+- Logs: `LogsNetzwerkscan/scan_YYYY-MM-DD.txt` (created automatically)
 
-Ports: 22, 80, 443
+---
 
-Logs: LogsNetzwerkscan/scan_YYYY-MM-DD.txt (wird automatisch erstellt)
+## Configuration
 
-Konfiguration
-Am Anfang jedes Skripts können folgende Variablen angepasst werden:
+The following variables can be adjusted at the top of each script:
 
-Variable	Beschreibung	Beispiel
-netzwerk	IP-Bereich (CIDR)	"10.0.0.0/24"
-ports	Ports (kommagetrennt)	"21,22,80,443,3389"
-logordner	Pfad für Log-Dateien	"C:\\Logs\\Scan"
-Beispielausgabe
-text
-[2026-03-06 09:30:00] Starte Netzwerkscan auf 192.168.178.0/24 (Ports: 22,80,443)
-🔎 3 aktive Geräte gefunden. Starte Port-Scan...
+| Variable | Description | Example |
+|---|---|---|
+| `netzwerk` | IP range (CIDR) | `"10.0.0.0/24"` |
+| `ports` | Ports (comma-separated) | `"21,22,80,443,3389"` |
+| `logordner` | Path for log files | `"C:\\Logs\\Scan"` |
 
-🟢 192.168.178.1 ist aktiv:
+---
+
+## Sample Output
+
+```
+[2026-03-06 09:30:00] Starting network scan on 192.168.178.0/24 (Ports: 22,80,443)
+🔎 3 active devices found. Starting port scan...
+🟢 192.168.178.1 is active:
    └ Port 80/tcp → open
    └ Port 443/tcp → open
+✅ Scan complete.
+```
 
-✅ Scan abgeschlossen.
+---
 
-Hinweis
-Nur in Netzwerken verwenden, für die eine Genehmigung vorliegt.
-Unautorisiertes Scannen fremder Netzwerke ist strafbar.
+## Legal Notice
+
+Only use this tool on networks you are authorized to scan.
+Unauthorized scanning of third-party networks is illegal.
